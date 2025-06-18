@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+body {
+	@apply bg-gray-100;
+}
+
+.card {
+	@apply bg-white rounded border border-gray-300 p-3;
+}
+
+.form-input {
+	@apply bg-gray-50 rounded border border-gray-300 text-sm p-3;
+}

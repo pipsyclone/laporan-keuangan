@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  userid   String    @id @default(uuid())
+  name     String
+  username String    @unique
+  password String
+  Reports  Reports[]
+
+  @@map("users")
+}
+
+model Reports {
+  reportid   String   @id @default(uuid())
+  userid     String
+  keterangan String
+  jumlah     Int      @default(0)
+  saldo      Int
+  total      Int
+  catatan    String?
+  tanggal    DateTime
+  tipe       String
+  users      Users    @relation(fields: [userid], references: [userid], onDelete: Cascade)
+
+  @@index([userid], map: "reports_userid_fkey")
+  @@map("reports")
+}
