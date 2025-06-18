@@ -59,9 +59,9 @@ export default function HomeComponent() {
 		}
 	};
 
-	const handleDelete = async (lkid) => {
+	const handleDelete = async (reportid) => {
 		await axios
-			.delete(`/api/delete/laporan-keuangan?lkid=${lkid}`)
+			.delete(`/api/delete/laporan-keuangan?reportid=${reportid}`)
 			.then((res) => {
 				loadData();
 				toast.success("Berhasil hapus data!", {
@@ -129,13 +129,15 @@ export default function HomeComponent() {
 			<Button
 				icon="fa-solid fa-pen"
 				className="p-button-primary p-button-sm flex-1"
-				onClick={() => (window.location.href = "/edit-laporan/" + rowData.lkid)}
+				onClick={() =>
+					(window.location.href = "/dashboard/edit-laporan/" + rowData.reportid)
+				}
 				label="Edit"
 			/>
 			<Button
 				icon="fa-solid fa-trash"
 				className="p-button-danger p-button-sm flex-1"
-				onClick={() => handleDelete(rowData.lkid)}
+				onClick={() => handleDelete(rowData.reportid)}
 				label="Hapus"
 			/>
 		</div>

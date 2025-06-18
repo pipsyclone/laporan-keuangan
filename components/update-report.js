@@ -7,7 +7,7 @@ import { toast, Bounce } from "react-toastify";
 
 export default function UpdateReportComponent() {
 	const [isLoading, setIsLoading] = useState(false);
-	const { lkid } = useParams();
+	const { reportid } = useParams();
 	const route = useRouter();
 
 	const [form, setForm] = useState({
@@ -29,10 +29,10 @@ export default function UpdateReportComponent() {
 		const fetchData = async () => {
 			try {
 				const res = await axios.get(
-					`/api/get/laporan-keuangan-by-id?lkid=${lkid}`
+					`/api/get/laporan-keuangan-by-id?reportid=${reportid}`
 				);
 				const data = res.data?.data;
-
+				console.log(data);
 				if (data) {
 					setForm({
 						keterangan: data.keterangan || "",
@@ -59,8 +59,8 @@ export default function UpdateReportComponent() {
 				});
 			}
 		};
-		if (lkid) fetchData();
-	}, [lkid]);
+		if (reportid) fetchData();
+	}, [reportid]);
 
 	const formData = new FormData();
 	formData.append("keterangan", form.keterangan);
@@ -76,7 +76,7 @@ export default function UpdateReportComponent() {
 		setIsLoading(true);
 
 		await axios
-			.put(`/api/put/ubah-laporan?lkid=${lkid}`, formData)
+			.put(`/api/put/ubah-laporan?reportid=${reportid}`, formData)
 			.then((res) => {
 				console.log(res.data);
 				toast.success("Berhasil ubah data!", {
@@ -90,7 +90,7 @@ export default function UpdateReportComponent() {
 					theme: "light",
 					transition: Bounce,
 				});
-				route.push("/");
+				route.push("/dashboard");
 			})
 			.catch((error) => {
 				console.error(error);

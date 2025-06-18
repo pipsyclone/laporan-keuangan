@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET(request) {
 	try {
 		const { searchParams } = new URL(request.url);
-		const reportid = searchParams.get("lkid");
+		const reportid = searchParams.get("reportid");
 
 		const data = await prisma.reports.findFirst({
 			where: { reportid: reportid },
