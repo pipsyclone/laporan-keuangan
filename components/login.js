@@ -25,7 +25,8 @@ export default function LoginComponent() {
 		} else {
 			signIn("credentials", { username, password, redirect: false }).then(
 				async (res) => {
-					if (res.error) {
+					if (!res.ok) {
+						console.log(res);
 						toast.warning("Username / password anda salah!", {
 							position: "top-right",
 							autoClose: 3000,
