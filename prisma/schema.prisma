@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -27,7 +27,7 @@ model Reports {
   catatan    String?
   tanggal    DateTime
   tipe       String
-  users      Users    @relation(fields: [userid], references: [userid], onDelete: Cascade)
+  users      Users    @relation(fields: [userid], references: [userid], map: "fk_reports_userid", onDelete: Cascade)
 
   @@index([userid], map: "reports_userid_fkey")
   @@map("reports")
